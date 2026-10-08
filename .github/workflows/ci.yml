@@ -1,0 +1,19 @@
+name: Server Health CI
+
+on: [push, pull_request]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7.0.1
+
+      - name: Install ShellCheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+
+      - name: Check Bash script
+        run: shellcheck server-health.sh
+
+      - name: Build Docker image
+        run: docker build -t server-health-tool:ci .
