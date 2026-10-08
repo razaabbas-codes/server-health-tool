@@ -14,4 +14,12 @@ From the project directory, run `./server-health.sh`.
 
 The generated report is saved in the `reports/` folder.
 
+## Docker
 
+Build the image from the project directory:
+`docker build -t server-health-tool:multi-stage .`
+
+Run it and save reports in `reports/`:
+`docker run --rm --user "$(id -u):$(id -g)" -v "$PWD/reports:/app/reports" server-health-tool:multi-stage`
+
+The build checks the script with ShellCheck. Reports are saved on the host in `reports/`.
